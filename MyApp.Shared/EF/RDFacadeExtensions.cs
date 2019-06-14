@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MyApp.Shared.DataAccess
+namespace MyApp.Shared.EF
 {
     public static class RDFacadeExtensions
     {

@@ -36,7 +36,7 @@ namespace MyApp.Shared
         /// <param name="sql">The SQL query string.</param>
         /// <param name="parameters">The parameters to apply to the SQL query string.</param>
         /// <returns>Result</returns>
-        IQueryable<TElement> SqlQuery<TElement>(string sql, params object[] parameters) where TElement : class;
+        IQueryable<TElement> SqlQuery<TElement>(string sql, params object[] parameters) where TElement : BaseEntity;
 
         /// <summary>
         /// Executes the given DDL/DML command against the database.

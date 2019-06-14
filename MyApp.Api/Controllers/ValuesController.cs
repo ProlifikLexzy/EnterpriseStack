@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using MyApp.Data.Models;
-using MyApp.Shared.Services;
+using MyApp.Shared.EF.Services;
 
 namespace MyApp.Api.Controllers
 {

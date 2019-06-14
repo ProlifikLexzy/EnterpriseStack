@@ -1,4 +1,4 @@
-﻿namespace MyApp.Shared.DataAccess.Repository
+﻿namespace MyApp.Shared.EF.Repository
 {
     public enum OrderBy
     {

@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyApp.Shared.DataAccess.Repository
+namespace MyApp.Shared.EF.Repository
 {
     public class EntityRepository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
     {
@@ -31,15 +31,15 @@ namespace MyApp.Shared.DataAccess.Repository
             }
         }
 
-         public virtual IEnumerable<T> ExecuteSqlQuery<T>(string query, params object[] parameters)
-              where T : BaseEntity, new()
+        public virtual IEnumerable<T> ExecuteSqlQuery<T>(string query, params object[] parameters)
+             where T : BaseEntity, new()
         {
             return context.ExecuteSqlQuery<T>(query, parameters);
         }
 
-        public virtual IQueryable<TEntity> SelectQuery(string query, params object[] parameters)
+        public virtual IQueryable<TEntity> SqlRawQuery(string query, params object[] parameters)
         {
-            return context.SqlQuery<TEntity>(query, parameters).AsQueryable();
+            return context.SqlQuery<TEntity>(query, parameters);
         }
 
         public virtual IEnumerable<TEntity> SqlQuery(String sql, params object[] parameters)

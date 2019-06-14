@@ -5,10 +5,11 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyApp.Shared.DataAccess.Repository
+namespace MyApp.Shared.EF.Repository
 {
     public interface IRepository<TEntity> : IDisposable where TEntity : BaseEntity
     {
+        IQueryable<TEntity> SqlRawQuery(string query, params object[] parameters);
         IEnumerable<TEntity> SqlQuery(String sql, params object[] parameters);
         IQueryable<TEntity> GetAll();
         IQueryable<TEntity> GetAll(int pageIndex, int pageSize);

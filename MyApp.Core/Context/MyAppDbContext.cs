@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using MyApp.Data.Models;
 using MyApp.Data.Models.Map;
 using MyApp.Shared;
-using MyApp.Shared.DataAccess;
+using MyApp.Shared.EF;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -250,7 +250,7 @@ namespace MyApp.Core.Context
         /// <param name="sql">The SQL query string.</param>
         /// <param name="parameters">The parameters to apply to the SQL query string.</param>
         /// <returns>Result</returns>
-        public IQueryable<TElement> SqlQuery<TElement>(string sql, params object[] parameters) where TElement : class
+        public IQueryable<TElement> SqlQuery<TElement>(string sql, params object[] parameters) where TElement : BaseEntity
         {
             return base.Set<TElement>().FromSql<TElement>(sql, parameters);
         }

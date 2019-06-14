@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MyApp.Shared.DataAccess.Repository
+namespace MyApp.Shared.EF.Repository
 {
     public class UnitOfWork : IUnitOfWork
     {

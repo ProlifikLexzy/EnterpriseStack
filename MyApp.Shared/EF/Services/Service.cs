@@ -1,5 +1,5 @@
-﻿using MyApp.Shared.DataAccess;
-using MyApp.Shared.DataAccess.Repository;
+﻿using MyApp.Shared.EF;
+using MyApp.Shared.EF.Repository;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyApp.Shared.Services
+namespace MyApp.Shared.EF.Services
 {
     public class Service<TEntity> : IService<TEntity>, IDataErrorInfo where TEntity : BaseEntity
     {
@@ -23,6 +23,11 @@ namespace MyApp.Shared.Services
         {
             UnitOfWork = unitOfWork;
             _repository = UnitOfWork.Repository<TEntity>();
+        }
+
+        public IQueryable<TEntity> SqlRawQuery(string sql, params object[] parameters)
+        {
+            return _repository.SqlRawQuery(sql, parameters);
         }
 
         protected bool IsValid<T>(T entity)

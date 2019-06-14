@@ -1,5 +1,5 @@
-﻿using MyApp.Shared.DataAccess;
-using MyApp.Shared.DataAccess.Repository;
+﻿using MyApp.Shared.EF;
+using MyApp.Shared.EF.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,10 +7,11 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyApp.Shared.Services
+namespace MyApp.Shared.EF.Services
 {
     public interface IService<TEntity> : IDisposable where TEntity : BaseEntity
     {
+        IQueryable<TEntity> SqlRawQuery(string sql, params object[] parameters);
         TEntity SingleOrDefault(Func<TEntity, bool> predicate);
         TEntity SingleOrDefault();
         TEntity FirstOrDefault();

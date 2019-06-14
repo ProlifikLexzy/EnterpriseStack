@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyApp.Shared.DataAccess
+namespace MyApp.Shared.EF
 {
     public class PaginatedList<T> : List<T>
     {
