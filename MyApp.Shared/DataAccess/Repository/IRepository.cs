@@ -9,6 +9,7 @@ namespace MyApp.Shared.DataAccess.Repository
 {
     public interface IRepository<TEntity> : IDisposable where TEntity : BaseEntity
     {
+        IEnumerable<TEntity> SqlQuery(String sql, params object[] parameters);
         IQueryable<TEntity> GetAll();
         IQueryable<TEntity> GetAll(int pageIndex, int pageSize);
         IQueryable<TEntity> GetAll(int pageIndex, int pageSize, Expression<Func<TEntity, Guid>> keySelector, OrderBy orderBy = OrderBy.Ascending);
