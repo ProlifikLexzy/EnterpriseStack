@@ -12,7 +12,7 @@ using Microsoft.Extensions.Options;
 
 namespace MyApp.App
 {
-    public class Startup
+    public partial class Startup
     {
         public Startup(IConfiguration configuration)
         {
