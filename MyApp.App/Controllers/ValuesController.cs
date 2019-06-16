@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using MyApp.Data.Models;
 using MyApp.Shared.EF.Services;
 
-namespace MyApp.Api.Controllers
+namespace MyApp.App.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

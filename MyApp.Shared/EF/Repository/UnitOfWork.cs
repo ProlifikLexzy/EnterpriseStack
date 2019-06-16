@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using MyApp.Shared.EF;
 
 namespace MyApp.Shared.EF.Repository
 {
@@ -16,7 +17,6 @@ namespace MyApp.Shared.EF.Repository
             _context = context;
         }
 
-        private bool _disposed;
         private object syncRoot = new object();
 
         public int SaveChanges()

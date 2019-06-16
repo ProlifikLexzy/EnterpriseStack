@@ -45,9 +45,8 @@ namespace MyApp.Core.Context
                 // execute all stored-procedures
                 
             }
-            catch (Exception ex)
+            catch
             {
-
             }
         }
 
