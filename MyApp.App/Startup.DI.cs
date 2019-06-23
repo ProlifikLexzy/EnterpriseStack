@@ -1,9 +1,13 @@
 using System;
 using System.Data.SqlClient;
 using Microsoft.Extensions.DependencyInjection;
+using MyApp.Core.Services;
+using MyApp.Core.Services.Interfaces;
 using MyApp.Data.Models;
-using MyApp.Shared.Dapper.Interfaces;
-using MyApp.Shared.Dapper.Repository;
+using MyApp.Shared;
+using MyApp.Shared.Context;
+using MyApp.Shared.EF;
+using MyApp.Shared.EF.Repository;
 using MyApp.Shared.EF.Services;
 
 namespace MyApp.App
@@ -12,9 +16,10 @@ namespace MyApp.App
     {
         public void ConfigureDIService(IServiceCollection services)
         {
-            services.AddTransient<Service<Customer>, Service<Customer>>();
+            services.AddTransient<ICustomerService, CustomerService>();
+             services.AddScoped<IDbContext, MyAppDbContext>();
             services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
-            services.AddScoped(typeof(IDapperRepository<>), typeof(DapperRepository<>));
+            services.AddScoped(typeof(IRepository<>), typeof(EntityRepository<>));
         }
     }
 }

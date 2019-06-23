@@ -1,8 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using MyApp.Data.Models;
 
-namespace MyApp.Data.Models.Map
+namespace MyApp.Shared.Models.Map
 {
     public class MyAppUserRoleMap : IEntityTypeConfiguration<MyAppUserRole>
     {

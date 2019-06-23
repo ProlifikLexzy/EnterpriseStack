@@ -1,24 +1,29 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
-using MyApp.Core.Context;
+using System;
 using System.IO;
 
-public class MyAppDbContextFactory : IDesignTimeDbContextFactory<MyAppDbContext>
+namespace MyApp.Shared.Context
 {
-    public MyAppDbContext CreateDbContext(string[] args)
+
+    public class MyAppDbContextFactory : IDesignTimeDbContextFactory<MyAppDbContext>
     {
-        IConfigurationRoot configuration = new ConfigurationBuilder()
-           .SetBasePath(Directory.GetCurrentDirectory())
-           .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-           .AddJsonFile("appsettings.Development.json", optional: true)
-           .Build();
+        public MyAppDbContext CreateDbContext(string[] args)
+        {
+            Console.WriteLine(Directory.GetCurrentDirectory());
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+               .SetBasePath(Directory.GetCurrentDirectory())
+               .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+               .AddJsonFile("appsettings.Development.json", optional: true)
+               .Build();
 
-        var builder = new DbContextOptionsBuilder();
-        builder.EnableSensitiveDataLogging(true);
+            var builder = new DbContextOptionsBuilder();
+            builder.EnableSensitiveDataLogging(true);
 
-        var connectionString = configuration["ConnectionStrings:Default"];
-        builder.UseSqlServer(connectionString, b => b.MigrationsAssembly(this.GetType().Assembly.FullName));
-        return new MyAppDbContext(builder.Options);
+            var connectionString = configuration["ConnectionStrings:Default"];
+            builder.UseSqlServer(connectionString, b => b.MigrationsAssembly(this.GetType().Assembly.FullName));
+            return new MyAppDbContext(builder.Options);
+        }
     }
 }
