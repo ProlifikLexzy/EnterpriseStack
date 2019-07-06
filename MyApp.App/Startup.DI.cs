@@ -16,7 +16,6 @@ namespace MyApp.App
     {
         public void ConfigureDIService(IServiceCollection services)
         {
-            services.AddTransient<ICustomerService, CustomerService>();
              services.AddScoped<IDbContext, MyAppDbContext>();
             services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
             services.AddScoped(typeof(IRepository<>), typeof(EntityRepository<>));

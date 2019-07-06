@@ -27,7 +27,6 @@ namespace MyApp.Shared.Context
 
        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new CustomerMap());
             base.OnModelCreating(modelBuilder);
         }
     }
