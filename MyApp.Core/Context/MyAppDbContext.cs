@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace MyApp.Shared.Context
 {
-    public class MyAppDbContext : SharedDbContext
+    public class MyAppDbContext : AuthDbContext
     {
         private IDbContextTransaction _transaction;
         public MyAppDbContext(DbContextOptions options) : base(options)

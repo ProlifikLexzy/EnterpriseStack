@@ -18,10 +18,10 @@ using System.Threading.Tasks;
 
 namespace MyApp.Shared.Context
 {
-    public class SharedDbContext : IdentityDbContext<MyAppUser, MyAppRole, Guid, MyAppUserClaim, MyAppUserRole, MyAppUserLogin, MyAppRoleClaim, MyAppUserToken>, IDbContext
+    public class AuthDbContext : IdentityDbContext<MyAppUser, MyAppRole, Guid, MyAppUserClaim, MyAppUserRole, MyAppUserLogin, MyAppRoleClaim, MyAppUserToken>, IDbContext
     {
         private IDbContextTransaction _transaction;
-        public SharedDbContext(DbContextOptions options) : base(options)
+        public AuthDbContext(DbContextOptions options) : base(options)
         {
         }
 
@@ -42,7 +42,6 @@ namespace MyApp.Shared.Context
             try
             {
                 // execute all stored-procedures
-                
             }
             catch
             {

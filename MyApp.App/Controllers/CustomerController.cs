@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using MyApp.Core.Services;
 using MyApp.Core.Services.Interfaces;
 using MyApp.Data.Models;
 using MyApp.Shared.EF.Services;
@@ -12,11 +14,26 @@ namespace MyApp.App.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly ICustomerService customerService;
-
-        public CustomerController(ICustomerService customerService)
+        private readonly ICustomerService vendorService;
+        
+        public CustomerController(IEnumerable<ICustomerService> collectionService)
         {
-            this.customerService = customerService;
+            collectionService.FirstOrDefault(c => c is ICustomerService customerService);
+            this.customerService = collectionService.LastOrDefault() as CustomerService;
         }
+
+
+        // public CustomerController(Consumer consumer)
+        // {
+        //     this.vendorService = consumer.UseVendorService();
+        //     this.customerService = consumer.UseCustomerService();
+        // }
+
+        // public CustomerController(ICustomerService customerService, ICustomerService vendorService)
+        // {
+        //     this.customerService = customerService;
+        //     this.vendorService = vendorService;
+        // }
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()

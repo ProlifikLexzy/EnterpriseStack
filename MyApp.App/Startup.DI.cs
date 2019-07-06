@@ -16,10 +16,51 @@ namespace MyApp.App
     {
         public void ConfigureDIService(IServiceCollection services)
         {
+            services.AddTransient<ICustomerService, VendorService>();
             services.AddTransient<ICustomerService, CustomerService>();
-             services.AddScoped<IDbContext, MyAppDbContext>();
+            // services.AddTransient<Consumer>();
+            // services.AddTransient<VendorService>();
+            // services.AddTransient<CustomerService>();
+
+            // services.AddTransient<Func<string, ICustomerService>>(serviceProvider => key =>
+            // {
+            //     switch (key)
+            //     {
+            //         case "A":
+            //             return serviceProvider.GetService<VendorService>();
+            //         case "B":
+            //             return serviceProvider.GetService<CustomerService>();
+            //         case "C":
+            //         default:
+            //             return null;
+            //     }
+            // });
+
+            services.AddScoped<IDbContext, MyAppDbContext>();
             services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
             services.AddScoped(typeof(IRepository<>), typeof(EntityRepository<>));
+        }
+    }
+
+    public class Consumer
+    {
+        private readonly Func<string, ICustomerService> serviceAccessor;
+
+        public Consumer(Func<string, ICustomerService> serviceAccessor)
+        {
+            this.serviceAccessor = serviceAccessor;
+        }
+
+        public ICustomerService UseVendorService()
+        {
+            //use serviceAccessor field to resolve desired type
+            return serviceAccessor("A");
+        }
+
+        public ICustomerService UseCustomerService()
+        {
+            //use serviceAccessor field to resolve desired type
+            return serviceAccessor("B");
         }
     }
 }
