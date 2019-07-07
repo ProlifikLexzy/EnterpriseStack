@@ -18,10 +18,10 @@ using System.Threading.Tasks;
 
 namespace MyApp.Shared.Context
 {
-    public class SharedDbContext : IdentityDbContext<MyAppUser, MyAppRole, Guid, MyAppUserClaim, MyAppUserRole, MyAppUserLogin, MyAppRoleClaim, MyAppUserToken>, IDbContext
+    public class AuthDbContext : IdentityDbContext<MyAppUser, MyAppRole, Guid, MyAppUserClaim, MyAppUserRole, MyAppUserLogin, MyAppRoleClaim, MyAppUserToken>, IDbContext
     {
         private IDbContextTransaction _transaction;
-        public SharedDbContext(DbContextOptions options) : base(options)
+        public AuthDbContext(DbContextOptions options) : base(options)
         {
         }
 
@@ -38,16 +38,6 @@ namespace MyApp.Shared.Context
             modelBuilder.ApplyConfiguration(new MyAppUserLoginMap());
             modelBuilder.ApplyConfiguration(new MyAppUserTokenMap());
             modelBuilder.ApplyConfiguration(new MyAppUserClaimMap());
-
-            try
-            {
-                // execute all stored-procedures
-                
-            }
-            catch
-            {
-            }
-
             base.OnModelCreating(modelBuilder);
         }
 
@@ -101,44 +91,35 @@ namespace MyApp.Shared.Context
         {
             UpdateEntityState(entity, EntityState.Deleted);
         }
-
-
         public void SetAsDetached<TEntity>(TEntity entity) where TEntity : BaseEntity
         {
             UpdateEntityState(entity, EntityState.Detached);
         }
-
         public void BeginTransaction()
         {
             _transaction = Database.BeginTransaction();
         }
-
         public int Commit()
         {
             var saveChanges = SaveChanges();
             _transaction.Commit();
             return saveChanges;
         }
-
         public void Rollback()
         {
             _transaction.Rollback();
         }
-
-        public Task<int> CommitAsync()
+        public async Task<int> CommitAsync()
         {
-            var saveChangesAsync = SaveChangesAsync();
+            var saveChangesAsync = await SaveChangesAsync();
             _transaction.Commit();
             return saveChangesAsync;
         }
-
         private void UpdateEntityState<TEntity>(TEntity entity, EntityState entityState) where TEntity : BaseEntity
         {
-            //this.ChangeTracker.TrackGraph(entity, e => ApplyStateUsingIsKeySet(e.Entry));
             var dbEntityEntry = GetDbEntityEntrySafely(entity);
             dbEntityEntry.State = entityState;
         }
-
         private EntityEntry GetDbEntityEntrySafely<TEntity>(TEntity entity) where TEntity : BaseEntity
         {
             var dbEntityEntry = Entry<TEntity>(entity);
@@ -148,14 +129,8 @@ namespace MyApp.Shared.Context
             }
             return dbEntityEntry;
         }
-
         public override void Dispose()
         {
-            //if (this.Database.GetDbConnection() != null && this.Database.GetDbConnection().State == ConnectionState.Open)
-            //{
-            //    this.Database.GetDbConnection().Close();
-            //}
-
             base.Dispose();
         }
 
@@ -228,9 +203,6 @@ namespace MyApp.Shared.Context
 
             return result;
         }
-
-
-
         /// <summary>
         /// Use when Model isn't attach in context
         /// </summary>
@@ -269,10 +241,9 @@ namespace MyApp.Shared.Context
             return result;
         }
 
-
-        public Task<int> SaveChangesAsync()
+        public async Task<int> SaveChangesAsync()
         {
-            return base.SaveChangesAsync();
+            return await base.SaveChangesAsync();
         }
     }
 }

@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MyApp.Core\MyApp.Core.csproj" />
-    <ProjectReference Include="..\MyApp.Data\MyApp.Data.csproj" />
   </ItemGroup>
 
 </Project>
