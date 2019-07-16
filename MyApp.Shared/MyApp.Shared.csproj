@@ -5,8 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-  <PackageReference Include="Dapper" Version="1.50.7" />
+    <PackageReference Include="Confluent.Kafka" Version="1.1.0" />
+    <PackageReference Include="Dapper" Version="1.50.7" />
     <PackageReference Include="microsoft.aspnetcore.identity.entityframeworkcore" Version="2.2.0" />
+    <PackageReference Include="Microsoft.DotNet.PlatformAbstractions" Version="2.1.0" />
     <PackageReference Include="microsoft.entityframeworkcore" Version="2.2.4" />
     <PackageReference Include="microsoft.entityframeworkcore.relational" Version="2.2.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.4" />
@@ -14,6 +16,8 @@
     <PackageReference Include="microsoft.extensions.identity.stores" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
+    <PackageReference Include="System.Threading.Channels" Version="4.5.0" />
+    <PackageReference Include="protobuf-net" Version="2.4.0" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MyApp.Shared.PubSub
+{
+    public enum BusMessageTypes
+    {
+        UNKNOWN,
+        NEW_USER
+    }
+}
